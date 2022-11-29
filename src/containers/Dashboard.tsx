@@ -120,7 +120,7 @@ export default class Dashboard extends ApiComponent<
                         content: (
                             <div>
                                 <p>
-                                    CapRover uses{' '}
+                                    Gardens Engine uses{' '}
                                     <NewTabLink url="https://letsencrypt.org/">
                                         Let&#39;s Encrypt
                                     </NewTabLink>{' '}
@@ -136,7 +136,7 @@ export default class Dashboard extends ApiComponent<
                                     is to go one level deeper and setup your
                                     root domain. For example, if you own{' '}
                                     <code>example.com</code>, use{' '}
-                                    <code>*.caprover-root.example.com</code> as
+                                    <code>*.gardens-root.example.com</code> as
                                     your root domain. This will allow you to
                                     better manage your subdomains, do not use{' '}
                                     <code>*.example.com</code> as your root
@@ -296,24 +296,24 @@ export default class Dashboard extends ApiComponent<
         return (
             <Row justify="center">
                 <Col xs={{ span: 23 }} lg={{ span: 16 }}>
-                    <Card title="CapRover Root Domain Configurations">
+                    <Card title="Gardens Root Domain Configurations">
                         <div>
                             <p>
-                                The very first thing that CapRover needs is a
+                                The very first thing that Gardens Engine needs is a
                                 root domain. For example, if you own{' '}
                                 <i>myawesomecompany.com</i>, you can use{' '}
                                 <i>captain.myawesomecompany.com</i> or{' '}
                                 <i>foo.bar.myawesomecompany.com</i> as your root
                                 domain. First, you need to make sure that the ip
                                 address for all subdomains of the root domain
-                                resolve to the CapRover ip address. To do this,
+                                resolve to the Gardens Engine ip address. To do this,
                                 go to the DNS settings in your domain provider
                                 website, and set a wild card A entry.
                                 <br /> For example: <b> Type:</b> <u>A</u>,{' '}
-                                <b>Name (or host):</b> <u>*.caprover-root</u>,
+                                <b>Name (or host):</b> <u>*.gardens-root</u>,
                                 <b> IP (or Points to):</b>{' '}
                                 <u>110.120.130.140</u> where this is the IP
-                                address of your CapRover machine.
+                                address of your Gardens Engine machine.
                             </p>
                             <p>
                                 <i>
@@ -395,7 +395,7 @@ export default class Dashboard extends ApiComponent<
         return (
             <Row justify="center">
                 <Col xs={{ span: 23 }} lg={{ span: 16 }}>
-                    <Card title="CapRover Initial Setup">
+                    <Card title="Gardens Initial Setup">
                         <div>
                             <h3>
                                 Congratulations!{' '}
@@ -404,28 +404,17 @@ export default class Dashboard extends ApiComponent<
                                 </span>
                             </h3>
                             <p>
-                                <b /> You have installed CapRover successfully!{' '}
+                                <b /> You have installed Gardens Engine successfully!{' '}
                                 <b>
                                     But you still need to assign a domain and
                                     finish the HTTPS setup to fully set up
-                                    CapRover!{' '}
+                                    Gardens Engine!{' '}
                                 </b>
-                                You can set up your CapRover instance in two
-                                ways:
+                                You can set up your Gardens Engine instance the following way:
                             </p>
 
                             <ul>
-                                <li>
-                                    <b>Command Line Tool (RECOMMENDED): </b> On
-                                    your local machine, simply run
-                                    <br />
-                                    <code>npm i -g caprover</code>
-                                    <br />
-                                    followed by
-                                    <br />
-                                    <code>caprover serversetup</code>. Then
-                                    follow the guide.
-                                </li>
+                                
                                 <li>
                                     <b>Use the panel below: </b> This is a
                                     non-guided version of the Command Line
@@ -450,7 +439,7 @@ export default class Dashboard extends ApiComponent<
         return (
             <Row justify="center">
                 <Col xs={{ span: 23 }} lg={{ span: 16 }}>
-                    <Card title="CapRover">
+                    <Card title="Gardens Engine">
                         <div>
                             <h3>
                                 Congratulations!{' '}
@@ -459,9 +448,9 @@ export default class Dashboard extends ApiComponent<
                                 </span>
                             </h3>
                             <p>
-                                You have installed and set CapRover up
+                                You have installed and setup Gardens Engine
                                 successfully! You can now deploy your apps!
-                                Remember, with CapRover, you can deploy
+                                Remember, with Gardens Engine, you can deploy
                                 applications from source code (such as Node.js,
                                 PHP, Java, Ruby, Python etc), and you can also
                                 deploy ready to go applications such as MySQL,
@@ -471,7 +460,7 @@ export default class Dashboard extends ApiComponent<
                             <p>
                                 For more information on how to deploy
                                 applications from source code, make sure to have
-                                a look at our
+                                a look at Caprover docs:
                                 <a
                                     href="https://caprover.com/docs/sample-apps.html"
                                     target="_blank"

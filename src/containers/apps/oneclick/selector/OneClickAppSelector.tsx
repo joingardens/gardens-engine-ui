@@ -79,7 +79,7 @@ export default class OneClickAppSelector extends ApiComponent<
                     <p>
                         This is mainly for testing. You can copy and paste your
                         custom One-Click app template here. See{' '}
-                        <NewTabLink url="https://github.com/caprover/one-click-apps/tree/master/public/v4/apps">
+                        <NewTabLink url="https://github.com/joingardens/gardens-apps">
                             the main one click apps GitHub repository
                         </NewTabLink>{' '}
                         for samples and ideas.
@@ -183,8 +183,8 @@ export default class OneClickAppSelector extends ApiComponent<
                                 <p>
                                     One click apps are retrieved from the
                                     official{' '}
-                                    <NewTabLink url="https://github.com/caprover/one-click-apps">
-                                        CapRover One Click Apps Repository{' '}
+                                    <NewTabLink url="https://github.com/joingardens/gardens-apps">
+                                         One Click Apps Repository{' '}
                                     </NewTabLink>
                                     by default. You can add other public/private
                                     repositories if you want to.

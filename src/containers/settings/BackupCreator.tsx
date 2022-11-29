@@ -53,7 +53,7 @@ export default class BackupCreator extends ApiComponent<
         return (
             <div>
                 <p>
-                    Create a backup of CapRover configs in order to be able to
+                    Create a backup of Gardens Engine configs in order to be able to
                     spin up a clone of this server. Note that your application
                     data (volumes, and images) are not part of this backup. This
                     backup only includes the server configuration details, such

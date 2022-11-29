@@ -93,7 +93,7 @@ export default class OneClickAppConfigPage extends ApiComponent<
             .then(function (data: IOneClickTemplate) {
                 if (`${data.captainVersion}` !== '4') {
                     message.error(
-                        `One-click app version is ${data.captainVersion}, this version supports "v4". Make sure your CapRover is up-to-date with the latest version!!`
+                        `One-click app version is ${data.captainVersion}, this version supports "v4". Make sure your Gardens Engine is up-to-date with the latest version!!`
                     )
                     return
                 }
@@ -184,7 +184,7 @@ export default class OneClickAppConfigPage extends ApiComponent<
                                     template.caproverOneClickApp.variables.push(
                                         {
                                             id: ONE_CLICK_ROOT_DOMAIN_VAR_NAME,
-                                            label: 'CapRover root domain',
+                                            label: 'Gardens Engine root domain',
                                         }
                                     )
                                     valuesAugmented[

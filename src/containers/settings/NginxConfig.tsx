@@ -86,7 +86,7 @@ export default class NginxConfig extends ApiComponent<
                     isRefreshTimerActivated={self.state.isRefreshTimerActivated}
                 >
                     <div>
-                        Nginx is successfully updated, CapRover will restart in
+                        Nginx is successfully updated, Gardens Engine will restart in
                         30 seconds.{' '}
                         <b>
                             Please wait until the page is automatically
@@ -97,7 +97,7 @@ export default class NginxConfig extends ApiComponent<
                     </div>
                 </ReloadCaptainModal>{' '}
                 <p>
-                    CapRover allows you to set custom configurations for your
+                    Gardens Engine allows you to set custom configurations for your
                     nginx router. This will allow high customization level in
                     terms of caching, special routing, http2 and etc.
                 </p>
@@ -133,7 +133,7 @@ export default class NginxConfig extends ApiComponent<
                     <div style={{ height: 40 }} />
                 </div>
                 <p>
-                    <b>CapRover Config Location in nginx container</b>:
+                    <b>Gardens Engine CapRover Config Location in nginx container</b>:
                     /etc/nginx/conf.d/captain-root.conf
                 </p>
                 <div

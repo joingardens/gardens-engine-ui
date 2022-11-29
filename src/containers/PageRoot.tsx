@@ -205,7 +205,7 @@ class PageRoot extends ApiComponent<
                                 self.createUpdateAvailableIfNeeded()) || (
                                 <Col lg={{ span: 12 }} xs={{ span: 20 }}>
                                     <div>
-                                        <h3 style={{ color: '#fff' }}>
+                                        <h3>
                                             <img
                                                 alt="logo"
                                                 src="/icon-512x512.png"
@@ -214,7 +214,7 @@ class PageRoot extends ApiComponent<
                                                     marginRight: 10,
                                                 }}
                                             />
-                                            CapRover
+                                            Gardens
                                             {self.createUpdateAvailableIfNeeded()}
                                         </h3>
                                     </div>
@@ -223,7 +223,7 @@ class PageRoot extends ApiComponent<
                             {!self.props.isMobile && (
                                 <Col span={12}>
                                     <Row justify="end">
-                                        <NewTabLink url="https://github.com/caprover/caprover">
+                                        <NewTabLink url="https://github.com/joingardens/gardens">
                                             <span style={{ marginRight: 20 }}>
                                                 GitHub
                                             </span>
@@ -234,7 +234,7 @@ class PageRoot extends ApiComponent<
                                                 marginRight: 70,
                                             }}
                                         >
-                                            <NewTabLink url="https://caprover.com">
+                                            <NewTabLink url="https://www.joingardens.com/tool/426">
                                                 Docs
                                             </NewTabLink>
                                         </span>
@@ -320,7 +320,7 @@ class PageRoot extends ApiComponent<
                                         role="menuitem"
                                         style={{ paddingLeft: 24 }}
                                     >
-                                        <NewTabLink url="https://github.com/caprover/caprover">
+                                        <NewTabLink url="https://github.com/joingardens/gardens">
                                             <GithubOutlined />
                                             GitHub
                                         </NewTabLink>
@@ -331,7 +331,7 @@ class PageRoot extends ApiComponent<
                                         role="menuitem"
                                         style={{ paddingLeft: 24 }}
                                     >
-                                        <NewTabLink url="https://caprover.com">
+                                        <NewTabLink url="https://www.joingardens.com/tool/426">
                                             <FileTextOutlined />
                                             Docs
                                         </NewTabLink>

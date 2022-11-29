@@ -188,7 +188,7 @@ export default class AddNode extends Component<
                     <Collapse>
                         <Collapse.Panel header="Alternative Method" key="1">
                             <p>
-                                CapRover uses SSH to connect to your nodes and
+                                Gardens Engine uses SSH to connect to your nodes and
                                 have them join the cluster. Sometimes, this
                                 process does not work due to non standard SSH
                                 configs such as custom ports, custom usernames,

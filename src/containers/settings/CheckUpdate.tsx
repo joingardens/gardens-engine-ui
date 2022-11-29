@@ -72,11 +72,11 @@ export default class CheckUpdate extends ApiComponent<
         return (
             <div>
                 <p>
-                    CapRover allows in-place updates to be installed. However,
-                    always read the change logs before updating your CapRover.
+                    Gardens Engine uses Caprover under the hood, which allows in-place updates to be installed. However,
+                    always read the change logs before updating your instance.
                     There might be breaking changes that you need to be aware
                     of. The update usually takes around 60 seconds and your
-                    CapRover may become unresponsive until the update process is
+                    Your instance may become unresponsive until the update process is
                     finished. Your apps will stay functional and responsive
                     during this time, except for a very short period of 10
                     seconds or less.
@@ -116,7 +116,7 @@ export default class CheckUpdate extends ApiComponent<
 
                 <div className={!versionInfo.canUpdate ? '' : 'hide-on-demand'}>
                     <Alert
-                        message="Your CapRover is the latest version."
+                        message="Your Engine is the latest version."
                         type="info"
                     />
                 </div>
@@ -130,7 +130,7 @@ export default class CheckUpdate extends ApiComponent<
                             your server connection speed.
                         </p>
                         <p>
-                            Your CapRover dashboard is not functional during the
+                            Your dashboard is not functional during the
                             update. Please wait until this page is refreshed
                             automatically.
                         </p>
