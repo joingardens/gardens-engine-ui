@@ -1,5 +1,4 @@
 import { Alert, Button, Card, Col, Row } from 'antd'
-import React from 'react'
 import { RouteComponentProps } from 'react-router'
 import { IOneClickAppIdentifier } from '../../../../models/IOneClickAppModels'
 import Toaster from '../../../../utils/Toaster'
@@ -8,6 +7,7 @@ import ApiComponent from '../../../global/ApiComponent'
 import CenteredSpinner from '../../../global/CenteredSpinner'
 import InputJsonifier from '../../../global/InputJsonifier'
 import NewTabLink from '../../../global/NewTabLink'
+import { OneClickAppCategorySelector } from './OneClickAppCategoriesFilter'
 import OneClickGrid from './OneClickGrid'
 import OneClickReposList from './OneClickReposList'
 
@@ -19,7 +19,8 @@ export default class OneClickAppSelector extends ApiComponent<
     {
         oneClickAppList: IOneClickAppIdentifier[] | undefined
         isCustomTemplateSelected: boolean
-        templateOneClickAppData: string
+        templateOneClickAppData: string,
+        categories: Record<string, string[]>
     }
 > {
     constructor(props: any) {
@@ -28,6 +29,7 @@ export default class OneClickAppSelector extends ApiComponent<
             oneClickAppList: undefined,
             isCustomTemplateSelected: false,
             templateOneClickAppData: '',
+            categories: {}
         }
     }
 
@@ -42,16 +44,14 @@ export default class OneClickAppSelector extends ApiComponent<
             .getAllOneClickApps()
             .then(function (data) {
                 const apps = data.oneClickApps as IOneClickAppIdentifier[]
-                apps.push({
-                    name: TEMPLATE_ONE_CLICK_APP,
-                    description:
-                        'A template for creating one-click apps. Mainly for development!',
-                    logoUrl: '/icon-512x512.png',
-                    baseUrl: '',
-                    displayName: '>> TEMPLATE <<',
-                })
+                const obj: Record<string, string[]> = {}
+                apps.map(a => obj[a.category] = [...obj[a.category] ? obj[a.category] : [], a.subcategory ])
+                for (let key of Object.keys(obj)) {
+                    obj[key] = Array.from(new Set(obj[key])) 
+                }
                 self.setState({
                     oneClickAppList: apps,
+                    categories: obj
                 })
             })
             .catch(Toaster.createCatcher())
@@ -189,6 +189,9 @@ export default class OneClickAppSelector extends ApiComponent<
                                     by default. You can add other public/private
                                     repositories if you want to.
                                 </p>
+                                <OneClickAppCategorySelector 
+                                categories={this.state.categories}
+                                />
 
                                 {self.createOneClickAppListGrid()}
 

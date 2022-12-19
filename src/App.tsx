@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import {
     ThemeSwitcherProvider,
-    useThemeSwitcher,
+    useThemeSwitcher
 } from 'react-css-theme-switcher'
 import { Provider } from 'react-redux'
 import { HashRouter, Route, Switch } from 'react-router-dom'
@@ -12,7 +12,6 @@ import PageRoot from './containers/PageRoot'
 import reducers from './redux/reducers'
 import CrashReporter from './utils/CrashReporter'
 import StorageHelper from './utils/StorageHelper'
-
 CrashReporter.getInstance().init()
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore)
