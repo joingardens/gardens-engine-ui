@@ -20,7 +20,8 @@ export default class OneClickAppSelector extends ApiComponent<
         oneClickAppList: IOneClickAppIdentifier[] | undefined
         isCustomTemplateSelected: boolean
         templateOneClickAppData: string,
-        categories: Record<string, string[]>
+        categories: Record<string, string[]>,
+        selectedCats: string[]
     }
 > {
     constructor(props: any) {
@@ -29,10 +30,22 @@ export default class OneClickAppSelector extends ApiComponent<
             oneClickAppList: undefined,
             isCustomTemplateSelected: false,
             templateOneClickAppData: '',
-            categories: {}
+            categories: {},
+            selectedCats: []
         }
     }
 
+    toggleArray = (subcat: string) => {
+        let newCats: string[] = []
+        if (this.state.selectedCats.includes(subcat)) {
+            newCats = this.state.selectedCats.filter(a => a !== subcat)
+        }
+        else {
+            newCats = [...this.state.selectedCats, subcat]
+        }
+        return this.setState({ selectedCats: newCats })
+
+    }
     componentDidMount() {
         const self = this
         self.fetchData()
@@ -45,9 +58,9 @@ export default class OneClickAppSelector extends ApiComponent<
             .then(function (data) {
                 const apps = data.oneClickApps as IOneClickAppIdentifier[]
                 const obj: Record<string, string[]> = {}
-                apps.map(a => obj[a.category] = [...obj[a.category] ? obj[a.category] : [], a.subcategory ])
+                apps.map(a => obj[a.category] = [...obj[a.category] ? obj[a.category] : [], a.subcategory])
                 for (let key of Object.keys(obj)) {
-                    obj[key] = Array.from(new Set(obj[key])) 
+                    obj[key] = Array.from(new Set(obj[key]))
                 }
                 self.setState({
                     oneClickAppList: apps,
@@ -122,10 +135,10 @@ export default class OneClickAppSelector extends ApiComponent<
                         onClick={() =>
                             self.props.history.push(
                                 `/apps/oneclick/${TEMPLATE_ONE_CLICK_APP}` +
-                                    (`?${ONE_CLICK_APP_STRINGIFIED_KEY}=` +
-                                        encodeURIComponent(
-                                            self.state.templateOneClickAppData
-                                        ))
+                                (`?${ONE_CLICK_APP_STRINGIFIED_KEY}=` +
+                                    encodeURIComponent(
+                                        self.state.templateOneClickAppData
+                                    ))
                             )
                         }
                         disabled={
@@ -155,6 +168,7 @@ export default class OneClickAppSelector extends ApiComponent<
                         self.setState({ isCustomTemplateSelected: true })
                     }
                 }}
+                catsState={self.state.selectedCats}
                 oneClickAppList={self.state.oneClickAppList!}
             />
         )
@@ -184,13 +198,15 @@ export default class OneClickAppSelector extends ApiComponent<
                                     One click apps are retrieved from the
                                     official{' '}
                                     <NewTabLink url="https://github.com/joingardens/gardens-apps">
-                                         One Click Apps Repository{' '}
+                                        One Click Apps Repository{' '}
                                     </NewTabLink>
                                     by default. You can add other public/private
                                     repositories if you want to.
                                 </p>
-                                <OneClickAppCategorySelector 
-                                categories={this.state.categories}
+                                <OneClickAppCategorySelector
+                                    catsState={this.state.selectedCats}
+                                    categories={this.state.categories}
+                                    toggleCats={this.toggleArray}
                                 />
 
                                 {self.createOneClickAppListGrid()}

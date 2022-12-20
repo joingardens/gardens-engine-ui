@@ -15,5 +15,13 @@
     "tslint.autoFixOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "tslint.exclude": "**/node_modules/**/*",
-    "cSpell.words": ["Jsonifier", "csrf", "definitelytyped", "promisified"]
+    "cSpell.words": [
+        "Jsonifier",
+        "csrf",
+        "definitelytyped",
+        "promisified"
+    ],
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    }
 }

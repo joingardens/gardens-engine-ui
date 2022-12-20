@@ -1,7 +1,7 @@
 import {
     FlagTwoTone,
     InfoCircleOutlined,
-    SafetyCertificateTwoTone,
+    SafetyCertificateTwoTone
 } from '@ant-design/icons'
 import { Card, Empty, Input, Row, Tooltip } from 'antd'
 import React, { Component, Fragment } from 'react'
@@ -17,7 +17,8 @@ export default class OneClickGrid extends Component<
         onAppSelectionChanged: (
             event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
             appName: string
-        ) => void
+        ) => void,
+        catsState: string[]
     },
     { sortScores: IHashMapGeneric<number>; selectedApp: string | undefined }
 > {
@@ -61,30 +62,34 @@ export default class OneClickGrid extends Component<
         const url =
             app.name && app.baseUrl
                 ? `/apps/oneclick/${app.name}?baseDomain=${encodeURIComponent(
-                      app.baseUrl
-                  )}`
+                    app.baseUrl
+                )}`
                 : '#'
-        return (
-            <div key={app.name + app.baseUrl} className="one-click-app-card">
-                <Link
-                    to={url}
-                    onClick={(event) =>
-                        this.props.onAppSelectionChanged(event, app.name)
-                    }
-                >
-                    <Card
-                        cover={<img src={app.logoUrl} alt="App logo" />}
-                        hoverable
+        if (!this.props.catsState.length || this.props.catsState.length && this.props.catsState.includes(app.subcategory)) {
+            return (
+                <div key={app.name + app.baseUrl} className="one-click-app-card">
+                    <Link
+                        to={url}
+                        onClick={(event) =>
+                            this.props.onAppSelectionChanged(event, app.name)
+                        }
                     >
-                        <Card.Meta
-                            title={app.displayName}
-                            description={app.description}
-                        />
-                        {self.create3rdPartyTagIfNeeded(app)}
-                    </Card>
-                </Link>
-            </div>
-        )
+                        <Card
+                            cover={<img src={app.logoUrl} alt="App logo" />}
+                            hoverable
+                        >
+                            <Card.Meta
+                                title={app.displayName}
+                                description={app.description}
+                            />
+                            {self.create3rdPartyTagIfNeeded(app)}
+                        </Card>
+                    </Link>
+                </div>
+            )
+        }
+        return <></>
+
     }
 
     render() {
