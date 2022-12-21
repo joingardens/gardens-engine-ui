@@ -73,6 +73,7 @@ export default class OneClickGrid extends Component<
                         onClick={(event) =>
                             this.props.onAppSelectionChanged(event, app.name)
                         }
+                        className={`mb-2`}
                     >
                         <Card
                             cover={<img src={app.logoUrl} alt="App logo" />}
@@ -83,8 +84,13 @@ export default class OneClickGrid extends Component<
                                 description={app.description}
                             />
                             {self.create3rdPartyTagIfNeeded(app)}
+                            <div className={`font-bold`}>
+                                {app.isFeatured ? "I'm featured!!" : ""}
+                            </div>
                         </Card>
+
                     </Link>
+
                 </div>
             )
         }
@@ -108,9 +114,10 @@ export default class OneClickGrid extends Component<
                 return self.state.sortScores[it.name] > 0.5
             })
         }
-
-        apps = apps.sort((x, y) => Number(x.isFeatured) - Number(y.isOfficial))
-
+        apps = apps.sort((x, y) => {
+            console.log(Number(y.isFeatured) - Number(x.isOfficial))
+            return Number(y.isFeatured) - Number(x.isOfficial)
+        })
         return (
             <Fragment>
                 <div style={{ height: 40 }} />
