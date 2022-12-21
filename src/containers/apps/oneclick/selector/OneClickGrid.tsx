@@ -109,6 +109,8 @@ export default class OneClickGrid extends Component<
             })
         }
 
+        apps = apps.sort((x, y) => Number(x.isFeatured) - Number(y.isOfficial))
+
         return (
             <Fragment>
                 <div style={{ height: 40 }} />

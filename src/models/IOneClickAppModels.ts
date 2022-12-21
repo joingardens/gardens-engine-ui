@@ -9,7 +9,8 @@ export interface IOneClickAppIdentifier {
     logoUrl: string
     baseUrl: string
 
-    category: string,
+    isFeatured: boolean
+    category: string
     subcategory: string
 }
 
