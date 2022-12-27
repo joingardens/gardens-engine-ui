@@ -1,235 +1,85 @@
-import { Alert, Button, Card, Col, Row } from 'antd'
+import { Alert, Card, Col, Row } from 'antd'
+import { useState } from 'react'
 import { RouteComponentProps } from 'react-router'
-import { IOneClickAppIdentifier } from '../../../../models/IOneClickAppModels'
-import Toaster from '../../../../utils/Toaster'
+import { UrlDictionary } from '../../../../core/dictionaries/url.dictionary'
 import Utils from '../../../../utils/Utils'
-import ApiComponent from '../../../global/ApiComponent'
 import CenteredSpinner from '../../../global/CenteredSpinner'
-import InputJsonifier from '../../../global/InputJsonifier'
 import NewTabLink from '../../../global/NewTabLink'
+import { useOneClickAppsContext } from '../context/OneClickContext'
 import { OneClickAppCategorySelector } from './OneClickAppCategoriesFilter'
-import OneClickGrid from './OneClickGrid'
+import { OneClickAppCustomTemplateInput } from './OneClickAppCustomTemplateInput'
+import { OneClickGrid } from './OneClickGrid'
 import OneClickReposList from './OneClickReposList'
 
 export const TEMPLATE_ONE_CLICK_APP = 'TEMPLATE_ONE_CLICK_APP'
 export const ONE_CLICK_APP_STRINGIFIED_KEY = 'oneClickAppStringifiedData'
 
-export default class OneClickAppSelector extends ApiComponent<
-    RouteComponentProps<any>,
-    {
-        oneClickAppList: IOneClickAppIdentifier[] | undefined
-        isCustomTemplateSelected: boolean
-        templateOneClickAppData: string,
-        categories: Record<string, string[]>,
-        selectedCats: string[]
-    }
-> {
-    constructor(props: any) {
-        super(props)
-        this.state = {
-            oneClickAppList: undefined,
-            isCustomTemplateSelected: false,
-            templateOneClickAppData: '',
-            categories: {},
-            selectedCats: []
-        }
-    }
 
-    toggleArray = (subcat: string) => {
-        let newCats: string[] = []
-        if (this.state.selectedCats.includes(subcat)) {
-            newCats = this.state.selectedCats.filter(a => a !== subcat)
-        }
-        else {
-            newCats = [...this.state.selectedCats, subcat]
-        }
-        return this.setState({ selectedCats: newCats })
+interface OneClickAppSelectorState {
+    isCustomTemplateSelected: boolean
+}
 
-    }
-    componentDidMount() {
-        const self = this
-        self.fetchData()
-    }
+export const OneClickAppSelector: React.FC<{
+    history: RouteComponentProps["history"]
+}> = ({ history }) => {
 
-    fetchData() {
-        const self = this
-        self.apiManager
-            .getAllOneClickApps()
-            .then(function (data) {
-                const apps = data.oneClickApps as IOneClickAppIdentifier[]
-                const obj: Record<string, string[]> = {}
-                apps.map(a => obj[a.category] = [...obj[a.category] ? obj[a.category] : [], a.subcategory])
-                for (let key of Object.keys(obj)) {
-                    obj[key] = Array.from(new Set(obj[key]))
-                }
-                self.setState({
-                    oneClickAppList: apps,
-                    categories: obj
-                })
-            })
-            .catch(Toaster.createCatcher())
-    }
+    const [state] = useState<OneClickAppSelectorState>({
+        isCustomTemplateSelected: false,
+    })
 
-    createCustomTemplateInput() {
-        const self = this
+    const { isLoading } = useOneClickAppsContext()
 
-        let isOneClickJsonValid = true
-        if (this.state.templateOneClickAppData) {
-            try {
-                JSON.parse(this.state.templateOneClickAppData)
-            } catch (error) {
-                isOneClickJsonValid = false
-            }
-        }
+    return (
+        <div>
+            <Row justify="center">
+                <Col xs={{ span: 23 }} lg={{ span: 23 }}>
+                    <Card title="One Click Apps">
+                        <div
+                            className={
+                                state.isCustomTemplateSelected
+                                    ? 'hide-on-demand'
+                                    : ''
+                            }
+                        >
+                            <p>
+                                Choose an app, a database or a bundle
+                                (app+database) from the list below. The rest
+                                is magic, well... Wizard!
+                            </p>
+                            <p>
+                                One click apps are retrieved from the
+                                official{' '}
+                                <NewTabLink url={UrlDictionary.ONE_CLICK_APPS_REPO}>
+                                    One Click Apps Repository{' '}
+                                </NewTabLink>
+                                by default. You can add other public/private
+                                repositories if you want to.
+                            </p>
+                            <OneClickAppCategorySelector
 
-        return (
-            <div
-                className={
-                    self.state.isCustomTemplateSelected ? '' : 'hide-on-demand'
-                }
-            >
-                <div>
-                    <p>
-                        This is mainly for testing. You can copy and paste your
-                        custom One-Click app template here. See{' '}
-                        <NewTabLink url="https://github.com/joingardens/gardens-apps">
-                            the main one click apps GitHub repository
-                        </NewTabLink>{' '}
-                        for samples and ideas.
-                    </p>
-                </div>
+                            />
 
-                <InputJsonifier
-                    placeholder={`YAML or JSON # use captainVersion 4
-{
-  "captainVersion": "4",
-  "version": "3.3"
-  "services": {
-    "$$cap_appname": {
-          "image": "adminer:$$cap_adminer_version",
-          "containerHttpPort": "8080",
-          "environment": {
-              "ADMINER_DESIGN": "$$cap_adminer_design"
-          }
-    }
-  }
-}`}
-                    onChange={(stringified) => {
-                        self.setState({
-                            templateOneClickAppData: stringified,
-                        })
-                    }}
-                />
-                <div style={{ height: 10 }} />
-                {!isOneClickJsonValid ? (
-                    <Alert
-                        message="One Click data that you've entered is not a valid JSON."
-                        type="error"
-                    />
-                ) : (
-                    <div />
-                )}
-                <div style={{ height: 30 }} />
-                <Row justify="space-between" align="middle">
-                    <Button
-                        onClick={() =>
-                            self.props.history.push(
-                                `/apps/oneclick/${TEMPLATE_ONE_CLICK_APP}` +
-                                (`?${ONE_CLICK_APP_STRINGIFIED_KEY}=` +
-                                    encodeURIComponent(
-                                        self.state.templateOneClickAppData
-                                    ))
-                            )
-                        }
-                        disabled={
-                            !self.state.templateOneClickAppData ||
-                            !isOneClickJsonValid
-                        }
-                        style={{ minWidth: 150 }}
-                        type="primary"
-                    >
-                        Next
-                    </Button>
-                </Row>
-            </div>
-        )
-    }
-
-    createOneClickAppListGrid() {
-        const self = this
-
-        if (!this.state.oneClickAppList) return <CenteredSpinner />
-
-        return (
-            <OneClickGrid
-                onAppSelectionChanged={(event, appName) => {
-                    if (appName === TEMPLATE_ONE_CLICK_APP) {
-                        event.preventDefault()
-                        self.setState({ isCustomTemplateSelected: true })
-                    }
-                }}
-                catsState={self.state.selectedCats}
-                oneClickAppList={self.state.oneClickAppList!}
-            />
-        )
-    }
-
-    render() {
-        const self = this
-
-        return (
-            <div>
-                <Row justify="center">
-                    <Col xs={{ span: 23 }} lg={{ span: 23 }}>
-                        <Card title="One Click Apps">
-                            <div
-                                className={
-                                    self.state.isCustomTemplateSelected
-                                        ? 'hide-on-demand'
-                                        : ''
-                                }
-                            >
-                                <p>
-                                    Choose an app, a database or a bundle
-                                    (app+database) from the list below. The rest
-                                    is magic, well... Wizard!
-                                </p>
-                                <p>
-                                    One click apps are retrieved from the
-                                    official{' '}
-                                    <NewTabLink url="https://github.com/joingardens/gardens-apps">
-                                        One Click Apps Repository{' '}
-                                    </NewTabLink>
-                                    by default. You can add other public/private
-                                    repositories if you want to.
-                                </p>
-                                <OneClickAppCategorySelector
-                                    catsState={this.state.selectedCats}
-                                    categories={this.state.categories}
-                                    toggleCats={this.toggleArray}
-                                />
-
-                                {self.createOneClickAppListGrid()}
-
-                                <div style={{ height: 50 }} />
-
-                                <OneClickReposList />
-                            </div>
-                            {Utils.isSafari() ? (
-                                <Alert
-                                    message="You seem to be using Safari. Deployment of one-click apps may be unstable on Safari. Using Chrome is recommended"
-                                    type="warning"
-                                />
-                            ) : (
-                                <div />
-                            )}
+                            {isLoading ? <CenteredSpinner /> : <OneClickGrid />}
                             <div style={{ height: 50 }} />
+                            <OneClickReposList />
+                        </div>
+                        {Utils.isSafari() ? (
+                            <Alert
+                                message="You seem to be using Safari. Deployment of one-click apps may be unstable on Safari. Using Chrome is recommended"
+                                type="warning"
+                            />
+                        ) : (
+                            <div />
+                        )}
+                        <div style={{ height: 50 }} />
+                        <OneClickAppCustomTemplateInput
+                            isCustomTemplateSelected={state.isCustomTemplateSelected}
+                            history={history}
+                        />
+                    </Card>
+                </Col>
+            </Row>
+        </div>
+    )
 
-                            {self.createCustomTemplateInput()}
-                        </Card>
-                    </Col>
-                </Row>
-            </div>
-        )
-    }
 }

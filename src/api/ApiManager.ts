@@ -1,5 +1,6 @@
 import { IAppDef } from '../containers/apps/AppDefinition'
 import { ICaptainDefinition } from '../models/ICaptainDefinition'
+import { IOneClickAppIdentifier } from '../models/IOneClickAppModels'
 import { IRegistryInfo } from '../models/IRegistryInfo'
 import { IVersionInfo } from '../models/IVersionInfo'
 import ErrorFactory from '../utils/ErrorFactory'
@@ -546,7 +547,7 @@ export default class ApiManager {
             .then(http.fetch(http.GET, '/user/system/nodes', {}))
     }
 
-    getAllOneClickApps() {
+    getAllOneClickApps(): Promise<{oneClickApps: IOneClickAppIdentifier[]}>{
         const http = this.http
 
         return Promise.resolve() //

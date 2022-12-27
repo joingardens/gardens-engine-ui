@@ -1,26 +1,22 @@
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import React, { useState } from "react";
-
-interface CategorySelectorProps {
-    categories: Record<string, string[]>
-    catsState: string[],
-    toggleCats: (arg: string) => any
-}
+import { OneClickContextValue, useOneClickAppsContext } from '../context/OneClickContext';
 
 
-export const OneClickAppCategorySelector: React.FC<CategorySelectorProps> = ({ categories, catsState, toggleCats }) => {
 
+export const OneClickAppCategorySelector: React.FC = () => {
 
+    const { categories, catsState, handleCategoryToggle } = useOneClickAppsContext()
 
     return (
-        <div className={`grid grid-cols-4 gap-2`}>
+        <div className={`grid md:grid-cols-3 grid-cols-2 lg:grid-cols-4 gap-2`}>
             {Object.entries(categories).map(([category, subcats]) => {
                 return (
                     <OneClickAppDropdown
                         category={category}
                         subcats={subcats}
                         catsState={catsState}
-                        toggleCats={toggleCats}
+                        toggleCats={handleCategoryToggle}
                     />
                 )
             })}
@@ -29,22 +25,18 @@ export const OneClickAppCategorySelector: React.FC<CategorySelectorProps> = ({ c
 }
 
 type OneClickAppDropdownProps = {
-    category: keyof CategorySelectorProps["categories"],
-    subcats: CategorySelectorProps["categories"][keyof CategorySelectorProps["categories"]]
+    category: keyof OneClickContextValue["categories"],
+    subcats: OneClickContextValue["categories"][keyof OneClickContextValue["categories"]]
     catsState: string[],
     toggleCats: (arg: string) => any
 
 }
 
-const DropdownStates = {
-    OPEN: true,
-    CLOSED: false
-} as const
 
 
 export const OneClickAppDropdown: React.FC<OneClickAppDropdownProps> = ({ category, subcats, catsState, toggleCats }) => {
     const [isOpen, setIsOpen] = useState(false)
-    const [parent, enableAnimations] = useAutoAnimate<HTMLDivElement>(/* optional config */)
+    const [parent] = useAutoAnimate<HTMLDivElement>(/* optional config */)
 
     const toggleDropdown = () => {
         return setIsOpen(!isOpen)
@@ -55,7 +47,6 @@ export const OneClickAppDropdown: React.FC<OneClickAppDropdownProps> = ({ catego
             <div >
                 <div
                     onClick={() => {
-                        console.log(`click ${subcats}`)
                         toggleDropdown()
                     }}
                     className={`p-4 w-full bg-green-300 font-bold`}>
