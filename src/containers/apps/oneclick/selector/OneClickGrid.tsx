@@ -30,8 +30,7 @@ export const OneClickGrid: React.FC = () => {
                     return state.sortScores[it.name] > 0.5
                 })
             }
-            apps = oneClickAppList.sort((x, y) => {
-                console.log(Number(y.isFeatured) - Number(x.isOfficial))
+            apps = apps.sort((x, y) => {
                 return Number(y.isFeatured) - Number(x.isOfficial)
             })
         }
