@@ -16,10 +16,10 @@ export const OneClickGrid: React.FC = () => {
     const { oneClickAppList } = useOneClickAppsContext()
     const [state, setState] = useState<OneClickGridState>({ sortScores: {} })
     const apps = useMemo(() => {
-        let apps: IOneClickAppIdentifier[] = []
+        let apps: IOneClickAppIdentifier[] = oneClickAppList || []
         if (oneClickAppList) {
             if (Object.keys(state.sortScores).length > 0) {
-                const appsSorted = oneClickAppList.concat().sort((a, b) => {
+                const appsSorted = apps.concat().sort((a, b) => {
                     return (
                         (state.sortScores[b.name] || 0) -
                         (state.sortScores[a.name] || 0)
@@ -60,6 +60,9 @@ export const OneClickGrid: React.FC = () => {
                                 searchTerm
                             )
                             setState({ ...state, sortScores })
+                            if (!searchTerm) {
+                                setState({ ...state, sortScores: {} })
+                            }
                         }
                     }}
                 />
