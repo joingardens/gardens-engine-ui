@@ -50,6 +50,7 @@ export const OneClickAppDropdown: React.FC<OneClickAppDropdownProps> = ({ catego
                         toggleDropdown()
                     }}
                     className={`p-4 w-full bg-green-300 font-bold`}>
+
                     {category}
                 </div>
                 <div
