@@ -1,5 +1,6 @@
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import React, { useState } from "react";
+import { Button } from '../../../../ui/components/button/button';
 import { OneClickContextValue, useOneClickAppsContext } from '../context/OneClickContext';
 
 
@@ -45,14 +46,17 @@ export const OneClickAppDropdown: React.FC<OneClickAppDropdownProps> = ({ catego
     if (subcats.length > 1) {
         return (
             <div >
-                <div
+                <Button
+                    intent="primary"
+                    loading={false}
+                    disabled={false}
                     onClick={() => {
                         toggleDropdown()
                     }}
-                    className={`p-4 w-full bg-green-300 font-bold`}>
+                    className={`p-4 w-full font-bold`}>
 
                     {category}
-                </div>
+                </Button>
                 <div
                     className={`
                                 transform-gpu duration-500 origin-top-left

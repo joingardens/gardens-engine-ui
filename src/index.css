@@ -1,3 +1,30 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    --color-primary: theme("colors.green.500");
+    --color-secondary: theme("colors.red.800");
+    --color-back-main: theme("colors.white");
+    --color-text-main: theme("colors.gray.800");
+    --color-primary-hover: theme("colors.green.600");
+    --color-secondary-hover: theme("colors.red.700")
+  }
+
+.funky-theme {
+    --color-primary: theme("colors.red.800");
+    --color-secondary: theme("colors.green.500");
+    --color-back-main: theme("colors.gray.800");
+    --color-text-main: theme("colors.white");
+    --color-primary-hover: theme("colors.red.700");
+    --color-secondary-hover: theme("colors.green.600")
+}
+
+.huyanky-theme {
+    --color-primary: theme("colors.red.800");
+    --color-secondary: theme("colors.green.500");
+    --color-back-main: theme("colors.violet.600");
+    --color-text-main: theme("colors.white");
+    --color-primary-hover: theme("colors.red.700");
+    --color-secondary-hover: theme("colors.green.600")
+}
