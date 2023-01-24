@@ -204,9 +204,8 @@ class PageRoot extends ApiComponent<
                             {(this.props.isMobile &&
                                 self.createUpdateAvailableIfNeeded()) || (
                                     <Col lg={{ span: 12 }} xs={{ span: 20 }}>
-                                        <div>
-                                            <h3>
-                                                <img
+                                        <div className="flex flex-row items-center h-full">
+                                            <img
                                                     alt="logo"
                                                     src="/icon-512x512.png"
                                                     style={{
@@ -214,6 +213,7 @@ class PageRoot extends ApiComponent<
                                                         marginRight: 10,
                                                     }}
                                                 />
+                                                <h3 className="text-xl">
                                                 Gardens
                                                 {self.createUpdateAvailableIfNeeded()}
                                             </h3>
@@ -397,7 +397,7 @@ class PageRoot extends ApiComponent<
                                     path="/apps/oneclick"
                                     component={OneClickAppPage}
                                 />
-                                <Route path="/apps/" component={Apps} />
+                                <Route path="/apps/" component={OneClickAppPage} />
                                 <Route
                                     path="/monitoring/"
                                     component={Monitoring}

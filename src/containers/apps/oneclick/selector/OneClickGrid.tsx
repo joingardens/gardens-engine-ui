@@ -40,15 +40,10 @@ export const OneClickGrid: React.FC = () => {
     return (
         <>
             <div style={{ height: 40 }} />
-            <div
-                style={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    justifyContent: 'center',
-                }}
-            >
-                <Input.Search
-                    style={{ maxWidth: 200, marginBottom: 30 }}
+            <div className="flex flex-col">
+
+            <Input.Search
+                    className="max-w-lg mx-auto pb-6"
                     placeholder="Search for an app..."
                     onChange={({ currentTarget }) => {
                         const searchTerm = (currentTarget.value || '')
@@ -66,7 +61,6 @@ export const OneClickGrid: React.FC = () => {
                         }
                     }}
                 />
-            </div>
             <div
                 style={{
                     display: 'flex',
@@ -74,6 +68,7 @@ export const OneClickGrid: React.FC = () => {
                     justifyContent: 'center',
                 }}
             >
+
                 {apps?.length ? (
                     apps.length &&
                     apps.map((app) => <OneClickAppCard key={app.name} app={app} />)
@@ -89,6 +84,7 @@ export const OneClickGrid: React.FC = () => {
                         </div>
                     </div>
                 )}
+            </div>
             </div>
         </>
     )

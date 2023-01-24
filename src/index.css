@@ -20,6 +20,18 @@
     --color-secondary-hover: theme("colors.green.600")
 }
 
+img, svg, video, canvas, audio, iframe, embed, object {
+    display: block;
+    vertical-align: baseline;
+}
+
+button, [type="button"], [type="reset"], [type="submit"] {
+    -webkit-appearance: button;
+    background-color: var(--color-primary);
+    background-image: none;
+    font-weight: 600;
+}
+
 .huyanky-theme {
     --color-primary: theme("colors.red.800");
     --color-secondary: theme("colors.green.500");

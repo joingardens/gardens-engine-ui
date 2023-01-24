@@ -10,7 +10,7 @@ export const OneClickAppCategorySelector: React.FC = () => {
     const { categories, catsState, handleCategoryToggle } = useOneClickAppsContext()
 
     return (
-        <div className={`grid md:grid-cols-3 grid-cols-2 lg:grid-cols-4 gap-2`}>
+        <div className={`flex flex-col`}>
             {Object.entries(categories).map(([category, subcats]) => {
                 return (
                     <OneClickAppDropdown
@@ -45,18 +45,19 @@ export const OneClickAppDropdown: React.FC<OneClickAppDropdownProps> = ({ catego
 
     if (subcats.length > 1) {
         return (
-            <div >
-                <Button
-                    intent="primary"
-                    loading={false}
-                    disabled={false}
-                    onClick={() => {
-                        toggleDropdown()
-                    }}
-                    className={`p-4 w-full font-bold`}>
-
-                    {category}
-                </Button>
+            <div>
+            <div>
+             <div className="py-2 flex w-full shadow border 
+        rounded-full hover:bg-green-100 cursor-pointer my-2"
+        onClick={() => toggleDropdown()}>
+        <div className="w-1/4 text-center">
+        <span className="text-sm">{isOpen ? ("▽") : ("▷")}</span>
+        </div>
+        <div className="w-3/4">
+        <span>{category}</span>
+        </div>
+        </div>
+        </div>
                 <div
                     className={`
                                 transform-gpu duration-500 origin-top-left

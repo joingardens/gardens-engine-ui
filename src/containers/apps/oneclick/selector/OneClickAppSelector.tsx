@@ -55,13 +55,17 @@ export const OneClickAppSelector: React.FC<{
                                 by default. You can add other public/private
                                 repositories if you want to.
                             </p>
-                            <OneClickAppCategorySelector
-
-                            />
-
-                            {isLoading ? <CenteredSpinner /> : <OneClickGrid />}
-                            <div style={{ height: 50 }} />
+                            <div className="flex flex-col md:flex-row">
+                            <div className="flex flex-col md:w-1/5 w-full mt-10">
+                            <OneClickAppCategorySelector />
+                            <div className="mt-12" />
                             <OneClickReposList />
+                            </div>
+                            <div className="md:w-4/5 w-full">
+                            {isLoading ? <CenteredSpinner /> : <OneClickGrid />}
+                            </div>
+                            <div style={{ height: 50 }} />
+                            </div>
                         </div>
                         {Utils.isSafari() ? (
                             <Alert
