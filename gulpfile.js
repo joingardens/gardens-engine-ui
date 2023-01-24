@@ -5,6 +5,8 @@ const debug = require('gulp-debug')
 var csso = require('gulp-csso')
 const autoprefixer = require('gulp-autoprefixer')
 const NpmImportPlugin = require('less-plugin-npm-import')
+var tailwindcss = require('tailwindcss');
+var postcss = require('gulp-postcss');
 
 gulp.task('watch', function () {
     watch(['src/styles/*'], gulp.series(['less']))
@@ -28,3 +30,9 @@ gulp.task('less', function () {
         )
         .pipe(gulp.dest('./public'))
 })
+
+gulp.task("tailwind", function () {
+    return gulp
+        .src("src/styles/index.css")
+})
+

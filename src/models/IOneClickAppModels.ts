@@ -8,6 +8,10 @@ export interface IOneClickAppIdentifier {
     description: string
     logoUrl: string
     baseUrl: string
+
+    isFeatured: boolean
+    category: string
+    subcategory: string
 }
 
 export interface IOneClickVariable {

@@ -1,5 +1,4 @@
 import { Button, Card, Col, Input, Modal, Row, Tooltip } from 'antd'
-import React from 'react'
 import { Redirect, RouteComponentProps } from 'react-router'
 import AppConstants from '../utils/AppConstants'
 import Toaster from '../utils/Toaster'
@@ -414,7 +413,7 @@ export default class Dashboard extends ApiComponent<
                             </p>
 
                             <ul>
-                                
+
                                 <li>
                                     <b>Use the panel below: </b> This is a
                                     non-guided version of the Command Line

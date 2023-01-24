@@ -1,4 +1,3 @@
-import React from 'react'
 import { RouteComponentProps } from 'react-router'
 import Toaster from '../../utils/Toaster'
 import ApiComponent from '../global/ApiComponent'
@@ -98,6 +97,7 @@ export default class Apps extends ApiComponent<
         return this.apiManager
             .getAllApps()
             .then(function (data: any) {
+                
                 self.setState({ apiData: data })
             })
             .catch(Toaster.createCatcher())

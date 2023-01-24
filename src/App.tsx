@@ -1,7 +1,11 @@
+import {
+    QueryClient,
+    QueryClientProvider
+} from '@tanstack/react-query'
 import { Component } from 'react'
 import {
     ThemeSwitcherProvider,
-    useThemeSwitcher,
+    useThemeSwitcher
 } from 'react-css-theme-switcher'
 import { Provider } from 'react-redux'
 import { HashRouter, Route, Switch } from 'react-router-dom'
@@ -12,7 +16,6 @@ import PageRoot from './containers/PageRoot'
 import reducers from './redux/reducers'
 import CrashReporter from './utils/CrashReporter'
 import StorageHelper from './utils/StorageHelper'
-
 CrashReporter.getInstance().init()
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore)
@@ -20,6 +23,8 @@ const store = createStoreWithMiddleware(reducers)
 type AppState = {
     isDarkMode: boolean
 }
+
+const queryClient = new QueryClient()
 
 const themes = {
     dark: `dark-theme.css`,
@@ -56,15 +61,17 @@ class App extends Component<{}, AppState> {
 
     render() {
         return (
-            <ThemeSwitcherProvider
-                themeMap={themes}
-                defaultTheme={this.state.isDarkMode ? 'dark' : 'light'}
-                insertionPoint="styles-insertion-point"
-            >
-                <Provider store={store}>
-                    <MainComponent />
-                </Provider>
-            </ThemeSwitcherProvider>
+            <QueryClientProvider client={queryClient}>
+                <ThemeSwitcherProvider
+                    themeMap={themes}
+                    defaultTheme={this.state.isDarkMode ? 'dark' : 'light'}
+                    insertionPoint="styles-insertion-point"
+                >
+                    <Provider store={store}>
+                        <MainComponent />
+                    </Provider>
+                </ThemeSwitcherProvider>
+            </QueryClientProvider>
         )
     }
 }

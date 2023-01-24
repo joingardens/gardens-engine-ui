@@ -8,7 +8,7 @@ import {
     GithubOutlined,
     LaptopOutlined,
     LogoutOutlined,
-    SettingOutlined,
+    SettingOutlined
 } from '@ant-design/icons'
 import { Button, Col, Layout, Menu, Row } from 'antd'
 import React, { Fragment, RefObject } from 'react'
@@ -21,7 +21,7 @@ import * as GlobalActions from '../redux/actions/GlobalActions'
 import StorageHelper from '../utils/StorageHelper'
 import AppDetails from './apps/appDetails/AppDetails'
 import Apps from './apps/Apps'
-import OneClickAppSelector from './apps/oneclick/selector/OneClickAppSelector'
+import { OneClickAppPage } from './apps/oneclick/selector/OneClickAppPage'
 import OneClickAppConfigPage from './apps/oneclick/variables/OneClickAppConfigPage'
 import Dashboard from './Dashboard'
 import ApiComponent from './global/ApiComponent'
@@ -203,23 +203,23 @@ class PageRoot extends ApiComponent<
                             )}
                             {(this.props.isMobile &&
                                 self.createUpdateAvailableIfNeeded()) || (
-                                <Col lg={{ span: 12 }} xs={{ span: 20 }}>
-                                    <div>
-                                        <h3>
+                                    <Col lg={{ span: 12 }} xs={{ span: 20 }}>
+                                        <div className="flex flex-row items-center h-full">
                                             <img
-                                                alt="logo"
-                                                src="/icon-512x512.png"
-                                                style={{
-                                                    height: 45,
-                                                    marginRight: 10,
-                                                }}
-                                            />
-                                            Gardens
-                                            {self.createUpdateAvailableIfNeeded()}
-                                        </h3>
-                                    </div>
-                                </Col>
-                            )}
+                                                    alt="logo"
+                                                    src="/icon-512x512.png"
+                                                    style={{
+                                                        height: 45,
+                                                        marginRight: 10,
+                                                    }}
+                                                />
+                                                <h3 className="text-xl">
+                                                Gardens
+                                                {self.createUpdateAvailableIfNeeded()}
+                                            </h3>
+                                        </div>
+                                    </Col>
+                                )}
                             {!self.props.isMobile && (
                                 <Col span={12}>
                                     <Row justify="end">
@@ -369,8 +369,8 @@ class PageRoot extends ApiComponent<
                                 marginRight: self.state.collapsed
                                     ? 0
                                     : self.props.isMobile
-                                    ? -200
-                                    : 0,
+                                        ? -200
+                                        : 0,
                                 transition: 'margin-right 0.3s ease',
                             }}
                             id="main-content-layout"
@@ -395,9 +395,9 @@ class PageRoot extends ApiComponent<
                                 />
                                 <Route
                                     path="/apps/oneclick"
-                                    component={OneClickAppSelector}
+                                    component={OneClickAppPage}
                                 />
-                                <Route path="/apps/" component={Apps} />
+                                <Route path="/apps/" component={OneClickAppPage} />
                                 <Route
                                     path="/monitoring/"
                                     component={Monitoring}
