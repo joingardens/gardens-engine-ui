@@ -1,6 +1,5 @@
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import React, { useState } from "react";
-import { Button } from '../../../../ui/components/button/button';
 import { OneClickContextValue, useOneClickAppsContext } from '../context/OneClickContext';
 
 
@@ -46,18 +45,18 @@ export const OneClickAppDropdown: React.FC<OneClickAppDropdownProps> = ({ catego
     if (subcats.length > 1) {
         return (
             <div>
-            <div>
-             <div className="py-2 flex w-full shadow border 
+                <div>
+                    <div className="py-2 flex w-full shadow border 
         rounded-full hover:bg-green-100 cursor-pointer my-2"
-        onClick={() => toggleDropdown()}>
-        <div className="w-1/4 text-center">
-        <span className="text-sm">{isOpen ? ("▽") : ("▷")}</span>
-        </div>
-        <div className="w-3/4">
-        <span>{category}</span>
-        </div>
-        </div>
-        </div>
+                        onClick={() => toggleDropdown()}>
+                        <div className="w-1/4 text-center">
+                            <span className="text-sm">{isOpen ? ("▽") : ("▷")}</span>
+                        </div>
+                        <div className="w-3/4">
+                            <span>{category}</span>
+                        </div>
+                    </div>
+                </div>
                 <div
                     className={`
                                 transform-gpu duration-500 origin-top-left

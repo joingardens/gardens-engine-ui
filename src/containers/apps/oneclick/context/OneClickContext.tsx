@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useCallback, useContext, useMemo, useState } from "react";
+import React, { PropsWithChildren, useCallback, useContext, useMemo, useState } from "react";
 import ApiManager from "../../../../api/ApiManager";
 import { IOneClickAppIdentifier } from "../../../../models/IOneClickAppModels";
 import Logger from "../../../../utils/Logger";
@@ -25,7 +25,7 @@ const OneClickAppsQueryKey = "ONE_CLICK_APPS_QUERY"
 
 const apiManager = new ApiManager()
 
-export const OneClickContextProvider: React.FC = ({ children }) => {
+export const OneClickContextProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
     const oneClickAppsQuery = useQuery({
         queryKey: [OneClickAppsQueryKey],
